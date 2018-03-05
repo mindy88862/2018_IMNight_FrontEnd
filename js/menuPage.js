@@ -1,4 +1,4 @@
-var login = true;
+var login = false;
 var cardDrawn = false;
 var discountTaken = false;
 
@@ -155,7 +155,10 @@ $(function(){
 	});
 
 	$('#rule-title').fadeTo(1000, 0.7, 'swing', function() {
-		$('#rule-space').show("blind", 500);
+		$('#rule-space').show("blind", 800, function() {
+			var h = $('body').height();
+			$('#content-background').css('height', h);
+		});
 	});
 
 })

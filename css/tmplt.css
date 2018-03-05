@@ -25,7 +25,7 @@
     height:100%;
   	opacity:0.3;
 	top:0px;
-	background-image:url('../img/KV_OP.jpg');
+	background-image:url('../img/bgRed.jpg');
 	background-repeat:no-repeat;
 	background-position:center center;
 	background-attachment: fixed;
@@ -41,13 +41,13 @@
     height:100%;
   	opacity:0.3;
 	top:0px;
-	/* background-image:url('../img/KV_OP.jpg'); */
+	background-image:url('../img/bgRed.jpg');
 	background-repeat:no-repeat;
 	background-position:center center;
 	background-attachment: fixed;
 	background-size: contain;
 	z-index: -1;
-	/* animation: bgFadeIn 1.0s; */
+	animation: bgFadeIn 1.0s;
 }
 
 .main-content{

@@ -351,7 +351,7 @@ input:checked + .slider:before {
 	border:none !important;
 	vertical-align: middle;
 	background-color:red;
-	background: url("../img/bg.jpg") no-repeat left center;
+	background: url("../img/home-bg.jpg") no-repeat left center;
 	height: 100%;
 	transition:all 1s;
 }

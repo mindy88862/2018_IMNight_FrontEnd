@@ -14,7 +14,7 @@ var resource = new Vue({
 			num:2,
 			title:'100杯奶茶',
 			detail:'管數要認真念喔:)',
-			imgUrl:'../img/bg.jpg',
+			imgUrl:'../img/home-bg.jpg',
 			info:'連連冠閔喔',
 		},{
 			num:3,
