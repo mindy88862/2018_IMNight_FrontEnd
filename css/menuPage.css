@@ -1,10 +1,10 @@
-html {
+/* html {
 	height: 100%;
 }
 
 body {
 	height: 100%;
-}
+} */
 
 #menuPage {
 	padding: 0;
@@ -12,17 +12,17 @@ body {
 	/* background-size: cover; */
 }
 
-.bgRed {
+/* .bgRed {
 	background: linear-gradient(rgba(255,255,255,0.8),rgba(255,255,255,0.8)), url("../img/bgRed-2.jpg") no-repeat center center;
 	height: 100%;
 	background-size: cover;
-}
+} */
 
-.jh {
+/* .jh {
 	font-weight: 900;
 	font-family: "微軟正黑體", "Microsoft JhengHei","細明體", "MingLiU", "標楷體", "DFKai-sb", serif;
 	color: #272727;
-}
+} */
 
 .no-marg {
 	margin-left: 0px;
@@ -55,5 +55,30 @@ body {
 
 #draw-card, 
 #draw-discount {
+	color: #ff5809;
 	font-size: 1.45rem;
 }
+
+#fb-btn {
+	background-color: #3b5998;
+	color: white;
+}
+
+.enlarge {
+	transition: 1.2s ease-in-out;
+}
+
+.floating {
+	-webkit-animation: float 1.2s infinite alternate;
+	-o-animation: float 1.2s infinite alternate;
+	animation: float 1.2s infinite alternate;
+}
+
+@keyframes float {
+	from {
+		transform: scale(1);
+	}
+	to {
+		transform: scale(1.1);
+	}
+} 

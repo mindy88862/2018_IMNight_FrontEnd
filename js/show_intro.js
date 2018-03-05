@@ -1,4 +1,4 @@
-let shows = new Vue({
+var shows = new Vue({
 	el: "#show-list",
 	data: {
 		shows: [
@@ -14,4 +14,15 @@ let shows = new Vue({
 			{ name:"2018IMNight", img: "../img/cover.jpg",intro: "5This is the 2018 IM Night LoGo.Hope you enjoy the show!",mbs:["2018之夜全體工作人員","還有你"] },
 		]
 	}
+})
+
+$(function(){
+	$('.lazy').Lazy({
+		effect: 'fadeIn',
+		effectTime: 1000,
+		threshold: 0,
+        onError: function(element) {
+            console.log('error loading ' + element.data('src'));
+        }
+	});	
 })

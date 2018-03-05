@@ -9,14 +9,17 @@
 		<link href="../css/bootstrap.min.css" rel="stylesheet">
 		
 		<!-- custom CSS-->
-	    <link href="../css/storyhouse_assist.css" rel="stylesheet">
+	    <link href="../css/storyhouse.css" rel="stylesheet">
 	</head>
 	
 	<body>
 		<div id = "mainContext">
-			<div class = "titles">
-				<div class="container">
-					<h1><b>IM 故事館</b></h1>
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<!-- <div class="titles"> -->
+						<h1 class="titles"><b>IM 故事館</b></h1>
+					<!-- </div> -->
+						<h6 class="subtitles">收藏著人們的故事</h6>
 				</div>
 			</div>
 			
@@ -24,8 +27,9 @@
 			<div class = "story">
 				<div class = "row">
 					<div class = "cardInRow" v-for = "e in stories" >
-						<div class = "card box-shadow" data-toggle="modal" :data-target="'#modal'+e.num" :style="{ backgroundImage: 'url(' + e.imgUrl + ')' }">
-						<!--	<img class="card-img" :src = "e.imgUrl" alt="Card image">-->
+						<!-- <div class = "card box-shadow" data-toggle="modal" :data-target="'#modal'+e.num" :style="{ backgroundImage: 'url(' + e.imgUrl + ')' }"> -->
+						<div class = "card box-shadow lazy" data-toggle="modal" :data-target="'#modal'+e.num" :data-src="e.imgUrl">
+							<img class="card-img lazy" :data-src = "e.imgUrl" alt="Card image">
 						</div>
 						
 						<div class = "triangle">
@@ -40,7 +44,7 @@
 				<!-- modal -->
 				<div v-for = "e in stories">
 					<div class="modal fade" :id = "'modal'+e.num" tabindex="-1" role="dialog">
-						<div class="modal-dialog modal-lg" role="document">
+						<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
 									<h5 class="modal-title">{{e.title}}</h5>
@@ -51,9 +55,9 @@
 								<div class="modal-body">
 									<p v-html = "e.info"></p>
 									<center v-on:click= "crack(e.num)">
-										<img v-bind = "{id: 'egg'+e.num}" class = "egg" src = "../img/egg.png" >
-										<img v-bind = "{id: 'eggDown'+e.num}" class = "eggdown hide" src = "../img/egg_down.png">
-										<img v-bind = "{id: 'eggUp'+e.num}" class = "eggup hide" src = "../img/egg_up.png">
+										<img v-bind = "{id: 'egg'+e.num}" class = "egg lazy" data-src = "../img/egg.png" >
+										<img v-bind = "{id: 'eggDown'+e.num}" class = "eggdown hide lazy" data-src = "../img/egg_down.png">
+										<img v-bind = "{id: 'eggUp'+e.num}" class = "eggup hide lazy" data-src = "../img/egg_up.png">
 									</center>
 								</div>
 							</div>
@@ -72,7 +76,7 @@
 		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 		
 		<!-- custom js -->
-		<script src = "../js/storyhouse_js.js"></script>
+		<script src = "../js/storyhouse.js"></script>
 		
 	</body>
 </html>
