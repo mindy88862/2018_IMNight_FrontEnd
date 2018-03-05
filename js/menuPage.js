@@ -54,9 +54,9 @@ function getDrawn() {
 
 function statusChangeCallback(response) {
 	console.log('statusChangeCallback');
-	console.log(response);
-	if (response.status === 'connect') {
-		alert('you\'ve logged in!!!');
+	console.log(response.authResponse);
+	if (response.status === 'connected') {
+		// alert('you\'ve logged in!!!');
 
 		// if the user has logged in, check if he has drawn card or taken discount
 		// then get news info
@@ -67,13 +67,15 @@ function statusChangeCallback(response) {
 		$('#remindModal').modal('toggle');
 	}
 	else {
-		alert('you\'ve not logged in!!!');
+		// alert('you\'ve not logged in!!!');
 		$('#remindModal').remove();
 		$('#loginModal').modal('toggle');
 
 		$('#fb-btn').on('click', function(){
 			FB.login(function(response) {
-				if (response.status === 'connect') {
+				// console.log(response);
+
+				if (response.status === 'connected') {
 					alert('you\'ve logged in!!!!!');
 				}
 				else {
@@ -94,65 +96,97 @@ $(function(){
         }
 	});
 
-	// $.ajaxSetup({ cache: true });
-	// $.getScript('https://connect.facebook.net/en_US/sdk.js', function(){
-	//     FB.init({
-	//       appId      : '155420448490917',
-	//       cookie     : true,
-	//       xfbml      : true,
-	//       version    : 'v2.12'
-	//     });
-	//     FB.getLoginStatus(statusChangeCallback);
-	// });
+	// check if the user has logged in (at backend app)
+	// $.ajax({
+	// 	type: 'GET',
+	// 	url: 'https://imnight2018backend.ntu.im/accounts/check/login/',
+	// 	xhrFields: {
+ //            withCredentials: true
+ //        },
+ //        success: function(data) {
+	// 		login = data.auth_status;
+
+	// 		// if the user has logged in, check if he has drawn card or taken discount
+	// 		// then get news info
+	// 		// then remove log in modal
+	// 		if (login) {
+	// 			getDrawn();
+	// 			getNews();
+	// 			$('#loginModal').remove();
+	// 			$('#remindModal').modal('toggle');
+	// 		}
+
+	// 		// if the user hasn't logged in, remove remind modal
+	// 		else {
+	// 			$('#remindModal').remove();
+	// 			$('#loginModal').modal('toggle');
+	// 		}
+	// 	},
+	// 	error: function() {
+	// 		alert('get login status fail!');
+	// 	}
+	// });	
+
+	// check if the user has logged in (at facebook app)
+	$.ajaxSetup({ cache: true });
+	$.getScript('https://connect.facebook.net/en_US/sdk.js', function(){
+	    FB.init({
+	      appId      : '155420448490917',
+	      cookie     : true,
+	      xfbml      : true,
+	      version    : 'v2.12'
+	    });
+	    FB.getLoginStatus(statusChangeCallback);
+	});
 
 	// FB.getLoginStatus(function(response) {
 	//     statusChangeCallback(response);
 	// });
 
 	// check if the user has logged in
-	$.ajax({
-		type: 'GET',
-		url: 'https://imnight2018backend.ntu.im/accounts/check/login/',
-		xhrFields: {
-            withCredentials: true
-        },
-        success: function(data) {
-			login = data.auth_status;
+	// $.ajax({
+	// 	type: 'GET',
+	// 	url: 'https://imnight2018backend.ntu.im/accounts/check/login/',
+	// 	xhrFields: {
+ //            withCredentials: true
+ //        },
+ //        success: function(data) {
+	// 		login = data.auth_status;
 
-			// if the user has logged in, check if he has drawn card or taken discount
-			// then get news info
-			// then remove log in modal
-			if (login) {
-				getDrawn();
-				getNews();
-				$('#loginModal').remove();
-				$('#remindModal').modal('toggle');
-			}
+	// 		// if the user has logged in, check if he has drawn card or taken discount
+	// 		// then get news info
+	// 		// then remove log in modal
+	// 		if (login) {
+	// 			getDrawn();
+	// 			getNews();
+	// 			$('#loginModal').remove();
+	// 			$('#remindModal').modal('toggle');
+	// 		}
 
-			// if the user hasn't logged in, remove remind modal
-			else {
-				$('#remindModal').remove();
-				$('#loginModal').modal('toggle');
+	// 		// if the user hasn't logged in, remove remind modal
+	// 		else {
+	// 			$('#remindModal').remove();
+	// 			$('#loginModal').modal('toggle');
 
-				// 註冊fb-btn click event (ajax)
-				// $('#fb-btn').on('click', function() {
-				// 	$.ajax({
-				// 		type: 'GET',
-				// 		url: 'https://imnight2018backend.ntu.im/accounts/social/facebook/login/',
-				// 		xhrFields: {
-				// 			withCredentials: true
-				// 		},
-				// 		success: function(data) {
-				// 			console.log(data);
-				// 		}
-				// 	});
-				// });
-			}
-		},
-		error: function() {
-			alert('get login status fail!');
-		}
-	});
+	// 			// 註冊fb-btn click event (ajax)
+	// 			// $('#fb-btn').on('click', function() {
+	// 			// 	$.ajax({
+	// 			// 		type: 'GET',
+	// 			// 		url: 'https://imnight2018backend.ntu.im/accounts/social/facebook/login/',
+	// 			// 		xhrFields: {
+	// 			// 			withCredentials: true
+	// 			// 		},
+	// 			// 		success: function(data) {
+	// 			// 			console.log(data);
+	// 			// 		}
+	// 			// 	});
+	// 			// });
+	// 		}
+	// 	},
+	// 	error: function() {
+	// 		alert('get login status fail!');
+	// 	}
+	// });
 
 	$('#rule-title').fadeTo(1000, 0.7, 'swing', function() {
 		$('#rule-space').show("blind", 800, function() {
