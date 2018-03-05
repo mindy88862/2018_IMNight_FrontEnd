@@ -8,6 +8,9 @@ function loadPage(page,callback){
 	if( ! (script_name == prev_js && css_name == prev_css) || prev_js == "../js/menuPage.js" ){
 		// console.log(prev_js)
 		
+		//hide the nav bar
+		$("#navbarResponsive").collapse('hide');
+
 		//remove previous page's html & js & css
 		$('script[src="'+ prev_js +'"]').remove();
 		$('link[href="'+ prev_css +'"]').remove();
@@ -44,20 +47,6 @@ function link(page){
 	loadPage(page);
 }
 
-$(".nav-link-collapse").click( function(){
-	let clpsd_title = $(this).parent().attr("title");
-	let all_clp = $(".nav-link-collapse");
-	all_title = []
-	for( let i = 0 ; i < all_clp.length ; i++ ){
-		let clp = $(all_clp[i]);
-		let t = clp.parent().attr("title")
-		if( t != clpsd_title ){
-			if ( clp.attr("class").split(" ").indexOf("collapsed") == -1 ){
-				clp.click();
-			}
-		}
-	}
-} );
 
 $(document).ready(function(){
 	$('.lazy').Lazy({
