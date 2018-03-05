@@ -47,6 +47,13 @@ function link(page){
 	loadPage(page);
 }
 
+$(document).click( function (event){
+	let clickover = event.target;
+	let opened = $(".navbar-collapse").hasClass('show');
+	if( opened && !$("nav.navbar").has(clickover).length ){
+		$("#navbarResponsive").collapse('hide');
+	}
+})
 
 $(document).ready(function(){
 	$('.lazy').Lazy({
