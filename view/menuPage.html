@@ -57,7 +57,7 @@
       </div>
 
       <!-- for log in modal -->
-      <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="false" v-if="!loggedIn">
+      <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="false">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -70,17 +70,19 @@
               您還沒登入喔，快來FB登入！
             </div>
             <div class="modal-footer justify-content-center">
-              <button type="button" class="btn jh" id="fb-btn" style="font-weight: 500">
-                <i class="fab fa-facebook-square fa-2x align-middle"></i>
-                <p class="mb-0 ml-2 align-middle" style="display: inline-block">Sign in with Facebook</p>
-              </button>
+              <a href="https://imnight2018backend.ntu.im/allauth/facebook/login/">
+                <button type="button" class="btn jh" id="fb-btn" style="font-weight: 500">
+                  <i class="fab fa-facebook-square fa-2x align-middle"></i>
+                  <p class="mb-0 ml-2 align-middle" style="display: inline-block">Sign in with Facebook</p>
+                </button>
+              </a>
             </div>
           </div>
         </div>
       </div>
 
       <!-- for remind modal -->
-      <div class="modal fade" id="remindModal" tabindex="-1" role="dialog" aria-labelledby="remindModalLabel" aria-hidden="false" v-if="loggedIn">
+      <div class="modal fade" id="remindModal" tabindex="-1" role="dialog" aria-labelledby="remindModalLabel" aria-hidden="false">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
 
@@ -105,11 +107,7 @@
               <div class="row justify-content-center">
                 <div class="col-10 col-sm-8">
                   <ol class="text-muted" id="news">
-<!--                     <li class="pl-3"><a href="#">This is a list item</a></li>
-                    <li class="pl-3">Another list item</li>
-                    <li class="pl-3">3</li>
-                    <li class="pl-3">4</li>
-                    <li class="pl-3">5</li> -->
+                    <!-- ajax get news text -->
                   </ol>
                 </div>
               </div>  
@@ -132,19 +130,17 @@
                 <div class="modal-body text-center">
               <div class="row text-center" id="card">
                 <div class="col-lg-4">
-                  <h2 class="title"><!-- {{ title }} {{ name }} -->
-                    副召 林雨新
-                  </h2>
+                  <h2 class="title">{{ title }} {{ name }}<!-- 副召 林雨新 --></h2>
                   <br>
                   <h4 class="title">負責內容：</h4>
-                  <h6 class="subtitle"><!-- {{ work }} -->???</h6>
+                  <h6 class="subtitle">{{ work }}<!-- ??? --></h6>
                   <br>
                   <h4 class="title">介紹：</h4>
-                  <h6 class="subtitle"><!-- {{ intro }} -->人稱火焰飆仔</h6>
+                  <h6 class="subtitle">{{ intro }}<!-- 人稱火焰飆仔 --></h6>
                   <br>
                 </div>
                 <div class="col-lg-8 modal-img">
-                  <img src='https://scontent.ftpe7-4.fna.fbcdn.net/v/t1.0-9/15740995_1398054983562621_5725420909575048254_n.jpg?_nc_fx=ftpe7-4&oh=f1252eded9cd025e39f6b3b1db87cf64&oe=5B1EC0C3' class="rounded" style="height:100%;width:100%">
+                  <img :src="img" class="rounded" style="height:100%;width:100%">
                 </div>
               </div>
                 </div>
@@ -170,13 +166,13 @@
               <div class="row text-center" id="coupon">
                 <div class="col-lg-4" id="store-des">
                   <h4 class="title">商店名稱：</h4>
-                  <h6 class="subtitle">季丼屋<!-- {{ name }} --></h6>
+                  <h6 class="subtitle"><!-- 季丼屋 -->{{ name }}</h6>
                   <br>
                   <h4 class="title">優惠卷內容：</h4>
-                  <h6 class="subtitle">海苔溫玉牛丼(大) 9折<!-- {{ content }} --></h6>
+                  <h6 class="subtitle"><!-- 海苔溫玉牛丼(大) 9折 -->{{ content }}</h6>
                   <br>
                   <h4 class="title">使用期限：</h4>
-                  <h6 class="subtitle">即日起至<!-- {{ deadline }} -->2018年02月14號</h6>
+                  <h6 class="subtitle">即日起至{{ deadline }}<!-- 2018年02月14號 --></h6>
                   <br>
                 </div>
                 <div class="col-lg-8 modal-img">
