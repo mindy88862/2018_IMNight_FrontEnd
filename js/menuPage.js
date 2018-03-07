@@ -71,18 +71,18 @@ function statusChangeCallback(response) {
 		$('#remindModal').remove();
 		$('#loginModal').modal('toggle');
 
-		$('#fb-btn').on('click', function(){
-			FB.login(function(response) {
-				// console.log(response);
+		// $('#fb-btn').on('click', function(){
+		// 	FB.login(function(response) {
+		// 		// console.log(response);
 
-				if (response.status === 'connected') {
-					alert('you\'ve logged in!!!!!');
-				}
-				else {
-					alert('you\'ve cancelled login.')
-				}
-			});
-		});
+		// 		if (response.status === 'connected') {
+		// 			alert('you\'ve logged in!!!!!');
+		// 		}
+		// 		else {
+		// 			alert('you\'ve cancelled login.')
+		// 		}
+		// 	});
+		// });
 	}
 }
 
