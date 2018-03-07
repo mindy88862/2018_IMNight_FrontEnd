@@ -96,7 +96,7 @@ nav{
 
 @media (min-width:992px){
 	#mainNav .navbar-brand{
-		width:250px
+		width:200px;
 	}
 	#mainNav .navbar-collapse{
 		overflow:visible;

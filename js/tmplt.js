@@ -47,6 +47,28 @@ function link(page){
 	loadPage(page);
 }
 
+function logout() {
+	// alert('logged out!!');
+
+	$.ajax({
+		type: 'post',
+		url: 'https://imnight2018backend.ntu.im/rest_auth/logout/',
+		// xhrFields: {
+		// 	withCredentials: true
+		// },
+		data: {},
+		success: function(result) {
+			console.log(result);
+			location.reload();
+		}
+	});
+
+	// $.post("https://imnight2018backend.ntu.im/rest_auth/logout/", {}, function(result){
+	// 	console.log(result);
+	// 	location.reload();
+	// });	
+}
+
 $(document).click( function (event){
 	let clickover = event.target;
 	let opened = $(".navbar-collapse").hasClass('show');
@@ -67,4 +89,6 @@ $(document).ready(function(){
 
 	// loadPage('remindPage');
 	loadPage('menuPage');
+
+	$('#logout-btn').on('click', logout);
 });
