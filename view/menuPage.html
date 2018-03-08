@@ -36,7 +36,7 @@
           <div class="card text-center rule-card">
             <div class="card-body">
               <h4 class="card-title jh">累積點數方式</h4>
-              <h6 class="jh text-muted lh">閱讀每日文章<br>領取每日優惠券<br>抽每日資管人<br>以及額外的任務</h6>      
+              <h6 class="jh text-muted lh">抽每日資管人<br>領取每日優惠券<br>閱讀每日文章<br>以及額外的任務</h6>      
             </div>
           </div>
         </div>
@@ -93,11 +93,17 @@
               </button>
             </div>
 
-            <div v-if="!(drawnCard&takenDiscount)" class="modal-body jh pb-0">
-              <h5 class="jh">
+            <div class="modal-body pb-0" id="remind-body">
+              <h5 v-if="!(drawnCard&takenDiscount)" class="jh">
                 您今日尚未 <a v-if="!drawnCard" id="draw-card" data-toggle="modal" data-target="#card-Modal">抽卡</a> 
                 <p v-if="!(drawnCard|takenDiscount)" style="display: inline-block;">及</p>
                 <a v-if="!takenDiscount" id="draw-discount" data-toggle="modal" data-target="#coupon-Modal">領取每日優惠</a>
+              </h5>
+              <h5 v-if="drawnCard" class="jh">
+                本日已抽卡，快去 <a class="drawn-text" onclick="link('IM_people')">找卡友聊聊</a>！<br>
+              </h5>
+              <h5 v-if="takenDiscount" class="jh">
+                快去使用優惠券，前往 <a class="drawn-text" onclick="link('couponList')">優惠券列表</a>
               </h5>
               <hr>
             </div>
@@ -132,10 +138,10 @@
                 <div class="col-lg-4">
                   <h2 class="title">{{ title }} {{ name }}<!-- 副召 林雨新 --></h2>
                   <br>
-                  <h4 class="title">負責內容：</h4>
+                  <h4 class="title">負責內容</h4>
                   <h6 class="subtitle">{{ work }}<!-- ??? --></h6>
                   <br>
-                  <h4 class="title">介紹：</h4>
+                  <h4 class="title">介紹</h4>
                   <h6 class="subtitle">{{ intro }}<!-- 人稱火焰飆仔 --></h6>
                   <br>
                 </div>
@@ -172,11 +178,11 @@
                   <h6 class="subtitle"><!-- 海苔溫玉牛丼(大) 9折 -->{{ content }}</h6>
                   <br>
                   <h4 class="title">使用期限：</h4>
-                  <h6 class="subtitle">即日起至{{ deadline }}<!-- 2018年02月14號 --></h6>
+                  <h6 class="subtitle">即日起至 {{ deadline }}<!-- 2018年02月14號 --></h6>
                   <br>
                 </div>
                 <div class="col-lg-8 modal-img">
-                  <img src="https://pic.gomaji.com/products/588/160588/160588_4_r.jpg?1501638246" class="rounded" style="height:100%;width:100%">
+                  <img :src="img" class="rounded" style="height:100%;width:100%">
                 </div>
               </div>
                 </div>

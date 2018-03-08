@@ -16,32 +16,6 @@
 	<title>2018 IM Night!</title>
 </head>
 <body>
-<!-- for facebook login sdk -->
-<!-- <script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '155420448490917',
-      cookie     : true,
-      xfbml      : true,
-      version    : 'v2.12'
-    });
-      
-    FB.AppEvents.logPageView();   
-      FB.getLoginStatus(function(response) {
-    console.log(response);
-});
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script> -->
-<!-- end of fb sdk -->
-
 	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="mainNav">
 	    <div class="navbar-brand jh" id="nav-btn" onclick="loadPage('menuPage')">2018 IM Night</div>
 	    <!-- <i class="fas fa-home" style="font-size: 1.6rem"></i> -->
@@ -129,7 +103,6 @@
 	<div class="content-wrapper">
 		<div class="container main-content">
 		<!-- put content here -->
-		
 		</div>
 	</div>
 	
@@ -139,18 +112,17 @@
 	<!-- for bootstrap -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" integrity="sha384-feJI7QwhOS+hwpX2zkaeJQjeiwlhOP+SdQDqhgvvo1DsjtiSQByFdThsxO669S2D" crossorigin="anonymous"></script> -->
 	<!-- for ../js scripts -->
 	<script src="../js/vue.min.js"></script>
 	<script src="../js/tmplt.js"></script>
-
 	<!-- for font-awesome -->
-	<!-- <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script> -->
 	<script src="../js/fontawesome-all.js"></script>
-
 	<!-- for lazy load -->
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.6/jquery.lazy.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.6/jquery.lazy.plugins.min.js"></script>
+    <!-- for jscookie cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+	
 
 </body>
 </html>

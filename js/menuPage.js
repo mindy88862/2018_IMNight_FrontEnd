@@ -15,22 +15,21 @@ var remind_modal = new Vue({
 var card = new Vue({
 	el: "#card",
 	data:{
-		title:"副召",
-		name:"陳漢威",
-		work:"work at home",
-		intro:"人稱花蓮王",
-		img:"https://scontent-tpe1-1.xx.fbcdn.net/v/t1.0-9/15590541_1356940990991726_7189281157210729010_n.jpg?oh=8eb3d7c7e8aa9659f2a308bfc32195a1&oe=5B4981FD"
-		// img: "https://i.imgur.com/67A5cyq.jpg"
+		title:"",
+		name:"",
+		work:"",
+		intro:"",
+		img:""
 	}
 });
 
 var coupon = new Vue({
 	el: "#coupon",
 	data:{
-		name:"季丼屋",
-		content:"海苔溫玉牛丼(大) 9折",
-		deadline:"2018年02月14號",
-		img:"http://pic.gomaji.com/products/588/160588/160588_4_r.jpg?1501638246"
+		name:"",
+		content:"",
+		deadline:"",
+		img:""
 	}
 })
 
@@ -76,8 +75,14 @@ function getDrawn() {
             withCredentials: true
         },
         success: function(data) {
+        	console.log(data);
 			remind_modal.drawnCard = data.performer_drawn;
-			remind_modal.takenDiscount = data.voucher_drawn;
+			remind_modal.takenDiscount = data.vocher_drawn;
+			// remind_modal.drawnCard = false;
+			// remind_modal.takenDiscount = true;
+
+			$('#loginModal').remove();
+			$('#remindModal').modal('toggle');
 		}
 	});	
 }
@@ -95,18 +100,15 @@ function is_login_init() {
             withCredentials: true
         },
         success: function(result) {
-			console.log(result.username);
+			// console.log(result.username);
 			username = result.username;
 			point = result.profile.point;
-			$('#login-text').html('<span>'+username+'，又見面了，您目前累積'+point+'點</span>');
+			$('#login-text').html('<span>又見面了，'+username+'！您目前累積 '+point+' 點</span>');
 		}
 	});
 
 	getDrawn();
 	getNews();
-
-	$('#loginModal').remove();
-	$('#remindModal').modal('toggle');
 }
 
 function draw_card() {
@@ -119,30 +121,17 @@ function draw_card() {
         success: function(result) {
 			console.log('draw card result:');
 			console.log(result);
+			// TODO
+			card.title = result[0].performer.profile.job;
+			card.name = result[0].performer.username;
+			card.work = result[0].performer.profile.job_description;
+			card.intro = result[0].performer.profile.bio;
+			card.img = result[0].performer.profile.img;
 		}
-	});	
+	});
 
-	// TODO
+	
 }
-
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-
-// get csrftoken
-var csrftoken = getCookie('csrftoken');
 
 function draw_coupon() {
 	$.ajax({
@@ -154,28 +143,32 @@ function draw_coupon() {
         success: function(result) {
 			console.log('draw coupon result:');
 			console.log(result);
+			coupon.name = result[0].vocher.title;
+			coupon.content = result[0].vocher.description;
+			coupon.img = result[0].vocher.img;
+			var deadlineText = result[0].vocher.due_time.substring(0,10);
+			coupon.deadline = deadlineText;
 		}
 	});
 
 	// TODO
-	$.ajax({
-		type: 'post',
-		url: 'https://imnight2018backend.ntu.im/earth/use/vocher/',
-		xhrFields: {
-			withCredentials: true
-		},
-		data: {"label":123},
-		// beforeSend: function(xhr) {
-		// 	xhr.setRequestHeader('X-CSRFToken', 'fiNBvAwG0HrLcnTXCVDZBGeRO2GZeXRLxzKXfXXrlb3gZn0gZtmAKpGsCzZEVVOE');
-		// },
-		beforeSend: function(request) {
-   			 request.setRequestHeader("X-CSRFTOKEN", csrftoken);
-  		},
-		crossDomain: true,
-		success: function(result) {
-			console.log(result);
-		}
-	});
+	// $.ajax({
+	// 	type: 'post',
+	// 	url: 'https://imnight2018backend.ntu.im/earth/use/vocher/',
+	// 	xhrFields: {
+	// 		withCredentials: true
+	// 	},
+	// 	data: JSON.stringify({"label":"98734288153398325662"}),
+	// 	contentType: "application/json",
+	// 	crossDomain: true,
+	// 	beforeSend: function(request) {
+	// 		var csrftoken = Cookies.get('csrftoken');
+ //   			request.setRequestHeader("X-CSRFTOKEN", csrftoken);
+ //  		},
+	// 	success: function(result) {
+	// 		console.log(result);
+	// 	}
+	// });
 
 }
 
