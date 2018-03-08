@@ -24,12 +24,12 @@ $(function(){
 $('#start').on('click', function() {
     if ($(window).width() <= 600) {
         setTimeout(function(){
-            location.href = "template.html";
+            location.href = "template.php";
         }, 500); 
     }
     else {
         setTimeout(function(){
-            location.href = "template.html";
+            location.href = "template.php";
         }, 500);
     }
 });    
