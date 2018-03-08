@@ -125,24 +125,26 @@ function draw_card() {
 	// TODO
 }
 
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
+// function getCookie(name) {
+//     var cookieValue = null;
+//     if (document.cookie && document.cookie !== '') {
+//         var cookies = document.cookie.split(';');
+//         for (var i = 0; i < cookies.length; i++) {
+//             var cookie = jQuery.trim(cookies[i]);
+//             // Does this cookie string begin with the name we want?
+//             if (cookie.substring(0, name.length + 1) === (name + '=')) {
+//                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+//                 break;
+//             }
+//         }
+//     }
+//     return cookieValue;
+// }
+
+
 
 // get csrftoken
-var csrftoken = getCookie('csrftoken');
+// var csrftoken = getCookie('csrftoken');
 
 function draw_coupon() {
 	$.ajax({
@@ -154,6 +156,7 @@ function draw_coupon() {
         success: function(result) {
 			console.log('draw coupon result:');
 			console.log(result);
+			
 		}
 	});
 
@@ -164,12 +167,10 @@ function draw_coupon() {
 		xhrFields: {
 			withCredentials: true
 		},
-		data: {"label":123},
-		// beforeSend: function(xhr) {
-		// 	xhr.setRequestHeader('X-CSRFToken', 'fiNBvAwG0HrLcnTXCVDZBGeRO2GZeXRLxzKXfXXrlb3gZn0gZtmAKpGsCzZEVVOE');
-		// },
+		data: {"label":"98734288153398325662"},
 		beforeSend: function(request) {
-   			 request.setRequestHeader("X-CSRFTOKEN", csrftoken);
+			var csrftoken = Cookies.get('csrftoken');
+   			request.setRequestHeader("X-CSRFTOKEN", csrftoken);
   		},
 		crossDomain: true,
 		success: function(result) {
