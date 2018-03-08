@@ -47,15 +47,17 @@ body {
 }
 
 #draw-card:hover, 
-#draw-discount:hover {
+#draw-discount:hover,
+.drawn-text {
 	color: red;
 	cursor: pointer;
 	/* font-size: 1.5rem; */
 }
 
 #draw-card, 
-#draw-discount {
-	color: #ff5809;
+#draw-discount,
+.drawn-text {
+	color: #ff5809 !important;
 	font-size: 1.45rem;
 }
 

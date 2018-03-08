@@ -53,10 +53,15 @@ function logout() {
 	$.ajax({
 		type: 'post',
 		url: 'https://imnight2018backend.ntu.im/rest_auth/logout/',
-		// xhrFields: {
-		// 	withCredentials: true
-		// },
+		xhrFields: {
+			withCredentials: true
+		},
 		data: {},
+		crossDomain: true,
+		beforeSend: function(request) {
+			var csrftoken = Cookies.get('csrftoken');
+   			request.setRequestHeader("X-CSRFTOKEN", csrftoken);
+  		},
 		success: function(result) {
 			console.log(result);
 			location.reload();

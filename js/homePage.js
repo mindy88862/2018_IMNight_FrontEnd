@@ -22,16 +22,9 @@ $(function(){
 })
 
 $('#start').on('click', function() {
-    if ($(window).width() <= 600) {
-        setTimeout(function(){
-            location.href = "template.php";
-        }, 500); 
-    }
-    else {
-        setTimeout(function(){
-            location.href = "template.php";
-        }, 500);
-    }
+    setTimeout(function(){
+        location.href = "template.html";
+    }, 500);
 });    
 
 // function fadeInImg(obj) {
