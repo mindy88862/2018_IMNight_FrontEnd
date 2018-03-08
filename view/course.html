@@ -1,87 +1,96 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8"></meta>
-		<meta name = "viewport" content = "width = device-width, initial-scale = 1, maximum-scale = 1" />
-		<title>課程與學習資源</title>
-		
-		<!-- Bootstrap core CSS -->
-		<link href="../css/bootstrap.min.css" rel="stylesheet">
-		
-		<!-- custom CSS-->
-	    <link href="../css/course.css" rel="stylesheet">
-	</head>
-	
-	<body>
-		<div id = "mainContext">
-			<div class = "titles">
-				<div class="container">
-					<h1><b>課程與學習資源</b></h1>
-				</div>
-			</div>
-			
-			<div class = "main">
-				<div class = "row">
-					<div class = "space" v-for = "e in classes" >
-						<!--front-->
-						<div class = "card" v-bind="{id: 'card'+e.num}" v-on:click = "move(e.num)">
-							<!-- <div class = "lazy cit hvr-curl-top-right" :data-src="{ 'background-image' : 'url(\'' + e.imgUrl + '\')' }"> -->
-							<div class = "lazy cit hvr-curl-top-right" :data-src="e.imgUrl">
-							</div>
-						</div>
-						<div class = "cb" :id = "'cb'+e.num">
-							<h4 class="card-title"><b>{{e.name}}</b></h4>
-							<h6 class="card-subtitle mb-2"><span><img class="lazy" data-src = "../img/manager.png"></span>{{e.teacher}}</h6>
-						</div>
-						
-						
-						<!--back-->
-						<div class = "box transform" v-bind="{id: 'back'+e.num}">
-							<h5>{{e.more}}
-								<span><img class = "lazy moreBtn" data-toggle="modal" :data-target="'#exampleModal'+e.num" data-src = "../img/play-button.png"></span>
-							</h5>
-						</div>
-					</div>
-				</div>
-				
-				<!--modal-->
-				<div class="modal fade" v-for = "e in classes" v-bind = "{id: 'exampleModal'+e.num}" tabindex="-1" role="dialog">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title">{{e.name}}</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<center>
-								<div class="modal-body">
-									<img :data-src="e.imgUrl" class = "lazy logo">
-									<p class = "textBreak">{{e.Info}}</p>
-									<img v-bind = "{id: 'egg'+e.num}" class = "lazy egg" data-src = "../img/egg.png" v-on:click= "crack(e.num)">
-									<img v-bind = "{id: 'eggDown'+e.num}" class = "lazy eggdown hide" data-src = "../img/egg_down.png">
-									<img v-bind = "{id: 'eggUp'+e.num}" class = "lazy eggup hide" data-src = "../img/egg_up.png">
+
+<head>
+    <meta charset="utf-8"></meta>
+    <meta name="viewport" content="width = device-width, initial-scale = 1, maximum-scale = 1" />
+    <title>課程與學習資源</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- custom CSS-->
+    <link href="../css/course.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="mainContext">
+        <div class="titles">
+            <div class="container">
+                <h1><b>課程與學習資源</b></h1>
+            </div>
+        </div>
+
+        <div class="main">
+            <div class="row">
+                <div class="space" v-for="e in classes">
+                    <!--front-->
+                    <div class="card" v-bind="{id: 'card'+e.id}" v-on:click="move(e.id)">
+                        <!-- <div class = "lazy cit hvr-curl-top-right" :data-src="{ 'background-image' : 'url(\'' + e.imgUrl + '\')' }"> -->
+                        <div class="lazy cit hvr-curl-top-right" :data-src="e.img" v-on:click = "showCourse(e.label,e.id)">
+                        </div>
+                    </div>
+                    <div class="cb" :id="'cb'+e.id">
+                        <h4 class="card-title"><b>{{e.name}}</b></h4>
+                        <h6 class="card-subtitle mb-2"><span><img class="lazy" data-src = "../img/manager.png"></span>{{e.teacher}}</h6>
+                    </div>
+
+
+                    <!--back-->
+                    <div class="box transform" v-bind="{id: 'back'+e.id}">
+                    <!--    <img class = "lazy moreBtn" data-toggle="modal" :data-target="'#exampleModal'+e.id" data-src = "../img/play-button.png">
+                    -->    
+						<h5 :id = "'des'+e.id">here</h5>
+						<img class = "moreBtn" data-toggle="modal" :data-target="'#exampleModal'+e.id" src = "../img/play-button.png">
+                    </div>
+                </div>
+				<center>
+					<button v-if = "courseMorethanFour" type="button" class="btn btn-outline-danger" onclick = "showMoreCourse()">更多課程</button>
+				</center>
+            </div>
+
+            <!--modal-->
+            <div class="modal fade" v-for="e in classes" v-bind="{id: 'exampleModal'+e.id}" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">{{e.name}}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+                        </div>
+                        <center>
+                            <div class="modal-body">
+                                <img :data-src="e.img" class="lazy logo">
+                                <p class="textBreak" :id ="'content'+e.id">content</p>
+                                <div v-on:click="crack(e.id,e.label)">
+									<img v-bind="{id: 'egg'+e.id}" class="egg" src="../img/egg.png">
+									<img v-bind="{id: 'eggUp'+e.id}" class="eggup hide" src="../img/egg_up.png">
+									<img v-bind="{id: 'eggDown'+e.id}" class="eggdown hide" src="../img/egg_down.png">
 								</div>
-							</center>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		
-		
+                            </div>
+                        </center>
+                    </div>
+                </div>
+            </div>
+			<!-- end modal -->
+        </div>
+    </div>
 
-		<!-- link for jquery and bootstrap -->
-		<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
-		<!-- vue -->
-		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
-		
-		<!-- custom js -->
-		<script src = "../js/course.js"></script>
-		
-	</body>
+
+
+    <!-- link for jquery and bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+    <!-- vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <!-- custom js -->
+    <script src="../js/course.js"></script>
+
+</body>
+
 </html>
