@@ -167,7 +167,7 @@ function draw_coupon() {
 		xhrFields: {
 			withCredentials: true
 		},
-		data: {"label":"98734288153398325662"},
+		data: JSON.stringify({"label":"98734288153398325662"}),
 		beforeSend: function(request) {
 			var csrftoken = Cookies.get('csrftoken');
    			request.setRequestHeader("X-CSRFTOKEN", csrftoken);
