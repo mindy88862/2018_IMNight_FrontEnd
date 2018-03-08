@@ -7,7 +7,7 @@ body {
 }
 
 #home-bg {
-	background: url("../img/home-bg.png") no-repeat center center;
+	background: url("../img/home-bg.jpg") no-repeat center center;
 	/* background: no-repeat center center; */
 	background-size: cover;
 

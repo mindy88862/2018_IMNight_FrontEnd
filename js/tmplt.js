@@ -8,6 +8,9 @@ function loadPage(page,callback){
 	if( ! (script_name == prev_js && css_name == prev_css) || prev_js == "../js/menuPage.js" ){
 		// console.log(prev_js)
 		
+		//hide the nav bar
+		$("#navbarResponsive").collapse('hide');
+
 		//remove previous page's html & js & css
 		$('script[src="'+ prev_js +'"]').remove();
 		$('link[href="'+ prev_css +'"]').remove();
@@ -44,20 +47,35 @@ function link(page){
 	loadPage(page);
 }
 
-$(".nav-link-collapse").click( function(){
-	let clpsd_title = $(this).parent().attr("title");
-	let all_clp = $(".nav-link-collapse");
-	all_title = []
-	for( let i = 0 ; i < all_clp.length ; i++ ){
-		let clp = $(all_clp[i]);
-		let t = clp.parent().attr("title")
-		if( t != clpsd_title ){
-			if ( clp.attr("class").split(" ").indexOf("collapsed") == -1 ){
-				clp.click();
-			}
+function logout() {
+	// alert('logged out!!');
+
+	$.ajax({
+		type: 'post',
+		url: 'https://imnight2018backend.ntu.im/rest_auth/logout/',
+		// xhrFields: {
+		// 	withCredentials: true
+		// },
+		data: {},
+		success: function(result) {
+			console.log(result);
+			location.reload();
 		}
+	});
+
+	// $.post("https://imnight2018backend.ntu.im/rest_auth/logout/", {}, function(result){
+	// 	console.log(result);
+	// 	location.reload();
+	// });	
+}
+
+$(document).click( function (event){
+	let clickover = event.target;
+	let opened = $(".navbar-collapse").hasClass('show');
+	if( opened && !$("nav.navbar").has(clickover).length ){
+		$("#navbarResponsive").collapse('hide');
 	}
-} );
+})
 
 $(document).ready(function(){
 	$('.lazy').Lazy({
@@ -71,4 +89,6 @@ $(document).ready(function(){
 
 	// loadPage('remindPage');
 	loadPage('menuPage');
+
+	$('#logout-btn').on('click', logout);
 });
