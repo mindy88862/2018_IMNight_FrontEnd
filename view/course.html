@@ -62,11 +62,14 @@
                             <div class="modal-body">
                                 <img :data-src="e.img" class="lazy logo">
                                 <p class="textBreak" :id ="'content'+e.id">content</p>
-                                <div v-on:click="crack(e.id,e.label)">
+                                <div v-on:click="crack(e.id)">
 									<img v-bind="{id: 'egg'+e.id}" class="egg" src="../img/egg.png">
+								</div>
+								<center>
 									<img v-bind="{id: 'eggUp'+e.id}" class="eggup hide" src="../img/egg_up.png">
 									<img v-bind="{id: 'eggDown'+e.id}" class="eggdown hide" src="../img/egg_down.png">
-								</div>
+								</center>
+								<template :id = "'task'+e.id"></template>
                             </div>
                         </center>
                     </div>

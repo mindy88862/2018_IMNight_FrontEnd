@@ -8,21 +8,22 @@ var resource = new Vue({
         move: function(k) {
             k = String(k);
             /*initiate others*/
-            for (var i = 1; i <= this.classes.length; i++) {
-                if (i == Number(k)) {
+            for (var i = 0; i < this.classes.length; i++) {
+                if (this.classes[i].id == Number(k)) {
                     $('#card' + k).toggleClass('lift');
                     $('#back' + k).toggleClass('transform-active');
                     $('#cb' + k).toggleClass('moveRight');
                 } else {
-                    $('#card' + String(i)).removeClass('lift');
-                    $('#back' + String(i)).removeClass('transform-active');
-                    $('#cb' + String(i)).removeClass('moveRight');
+                    $('#card' + this.classes[i].id).removeClass('lift');
+                    $('#back' + this.classes[i].id).removeClass('transform-active');
+                    $('#cb' + this.classes[i].id).removeClass('moveRight');
                 }
             }
         },
-        crack: function(k,label) {
-            /* need to add 1 point*/
+        crack: function(k) {
             k = String(k);
+			var label = $('#task'+k).html();
+			//console.log("this is the label: "+label);
             $('#egg' + k).addClass('hide');
 
             $('#eggDown' + k).removeClass('hide');
@@ -31,6 +32,7 @@ var resource = new Vue({
             $('#eggUp' + k).removeClass('hide');
             $('#eggUp' + k).addClass('upAnimate');
 			
+            /* need to add 1 point*/
 			$.ajax({
 				type: 'POST',
 				url: 'https://imnight2018backend.ntu.im/lottery/finish/',
@@ -63,6 +65,8 @@ var resource = new Vue({
 					console.log(data,id);
 					$('#des'+id).html(data[0].more);
 					$('#content'+id).html(data[0].content);
+					document.getElementById("task"+id).innerHTML = String(data[0].task);
+					//console.log(document.getElementById("task"+id).innerHTML);
 				},
 				error: function(data) {
 					alert("fail showCourse" + data);
