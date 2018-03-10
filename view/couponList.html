@@ -1,129 +1,131 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name = "viewport" content = "width = device-width, initial-scale = 1, maximum-scale = 1" />
-		<title>優惠券們</title>
-		
-		<!-- Bootstrap core CSS -->
-		<link href="../css/bootstrap.min.css" rel="stylesheet">
-		<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
-		<!-- custom css -->
-		<link href="../css/couponList.css" rel="stylesheet">
-		
-	</head>
-	
-	<body>
-		<div id = "mainContext">
-			<div class="row">
-				<div class="col-md-12 text-center">
-					<h1 class="titles"><b>優惠券們</b></h1>
-					<h6 class="subtitles"></h6>
-				</div>
-			</div>
-			
-			
-			<!--control panal-->
-			<div class = "main">			
-				<!-- switch -->
-				<nav class="navbar navbar-light">
-					<div class = "switchItem" >
-						<p>只顯示可使用之優惠券
-							<span>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width = device-width, initial-scale = 1, maximum-scale = 1" />
+    <title>優惠券們</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- custom css -->
+    <link href="../css/couponList.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div id="mainContext">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1 class="titles"><b>優惠券們</b></h1>
+                <h6 class="subtitles"></h6>
+            </div>
+        </div>
+
+
+        <!--control panal-->
+        <div class="main">
+            <!-- switch -->
+            <nav class="navbar navbar-light">
+                <div class="switchItem">
+                    <p>只顯示可使用之優惠券
+                        <span>
 								<label class="switch" id = "switch">
-									<input type="checkbox" class = "inputSwitch" v-model="checked">
+									<input type="checkbox" class = "inputSwitch" v-model="checked" onclick = "switchCase()">
 									<span class="slider round"></span>
-								</label>
-							</span>
-						</p>
-					</div>
-				</nav>
-				
-				<!--couponList start-->
-				<div class="row">
-					<div class = "cardInRow" v-for = "e in coupons" v-if = "!checked || e.usable">
-						<div class = "star rainbow" :id = "'star'+e.num" v-on:click = "grow(e.num)">
+                        </label>
+                        </span>
+                    </p>
+                </div>
+            </nav>
+
+            <!--couponList start-->
+            <div class="row">
+                <div class="cardInRow" v-for="e in coupons" v-if="!checked">
+                    <div class="star rainbow" :id="'star'+e.id" v-on:click="grow(e.id)">
+                    </div>
+                    <div class="description orbitLine" :id="'orb'+e.id">
+                        <h5><b>{{e.store.title}}</b></h5>
+                        <h3><b>{{e.title}}</b></h3>
+                    </div>
+                    <div class="card box-shadow" :id="'coupen'+e.id" data-toggle="modal" :data-target="'#modal'+e.id">
+                        <div class = "cit" :style="{ 'background-image' : 'url(\'' + e.img + '\')' }">
 						</div>
-						<div class = "description orbitLine" :id = "'orb'+e.num">
-							<h5><b>{{e.shop}}</b></h5>
-							<h3><b>{{e.name}}</b></h3>
-						</div>
-						<div class = "card box-shadow" :id = "'coupen'+e.num"  data-toggle="modal" :data-target="'#modal'+e.num">
-<!-- 							<div class = "cit" :style="{ 'background-image' : 'url(\'' + e.imgUrl + '\')' }">
-							</div> -->
-							<div class = "cit lazy" :data-src="e.imgUrl">
-							</div>						
-						</div>
-					</div>
-				</div>
-			
-				<!-- pop out modal Start-->
-				<div v-for = "e in coupons">
-					<div class="modal fade px-0" :id = "'modal'+e.num" tabindex="-1" role="dialog">
-						<div class="modal-dialog " role="document">
-							<div class="modal-content" :id = "'modal-content'+e.num">
-								<div class="modal-header">
-									<h5 class="modal-title">{{e.name}}</h5>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<!--<div class="cit lazy" :data-src="e.img">-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- pop out modal Start-->
+            <div v-for="e in coupons">
+                <div class="modal fade" :id="'modal'+e.id" tabindex="-1" role="dialog">
+                    <div class="modal-dialog " role="document">
+                        <div class="modal-content" :id="'modal-content'+e.id">
+                            <div class="modal-header">
+                                <h5 class="modal-title">{{e.title}}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
-								</div>
-								
-								<div class="modal-body" :id = "'modal-body'+e.num">
-									<div class="row">
-										<div class = "front" :id = "'front'+e.num">
-											<div class="col-md-6">
-												<img :src="e.imgUrl" style="width:100%;">
-												<!-- <img class="lazy" :data-src="e.imgUrl" style="width:100%;"> -->
-											</div>
-											<div class="col-md-6">
-												<center>
-													<b>商店名稱:</b><br />
-													{{e.shop}}<br />
-													<b>優惠券內容:</b><br />
-													{{e.detail}}<br />
-													<b>使用期限:</b><br />
-													{{e.time}}<br />
-													<br />
-													<a onclick="link('shop')" class="hvr-underline-from-right">商家列表</a>
-													<a v-if = "e.usable" class="hvr-underline-from-right" @click = "delayShow(e.num)">我要使用</a>
-												</center>
-											</div>
-										</div>
-									</div>
-									
-									<div class = "back hide" :id = "'back'+e.num">
-										<center>
-											<h4><b>確定要使用嗎?</b></h4>
-											<p>按錯就掰掰了喔QAQ</p>
-											<a class = "hvr-bubble-float-top" @click = "dcheck(e.num)">取消</a>
-											<a class = "hvr-bubble-float-top" @click = "submit(e.num)">確認</a>
-										</center>
-									</div>	
-									
-								</div>
-							</div>
-							
-													
-						</div>
-					</div>
-				</div>
-				<!-- pop out modal End-->
-			</div>
-		</div>
-		
-		<!-- link for jquery and bootstrap -->
-		<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-		
-		<!-- vue and bootstrap(for toggle)-->
-		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
-		<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-		
-		<!-- custom js-->
-		<script src="../js/couponList.js"></script>
-	</body>
+                            </div>
+
+                            <div class="modal-body" :id="'modal-body'+e.id">
+                                <div class="row">
+                                    <div class="front" :id="'front'+e.id">
+                                        <div class="col-md-6">
+                                            <!--		<img :src="e.imgUrl" style="width:100%;">-->
+                                            <img :src="e.img" style="width:100%;">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <center>
+                                                <b>商店名稱:</b><br /> {{e.store.title}}
+                                                <br />
+                                                <b>優惠券內容:</b><br /> {{e.description}}
+                                                <br />
+                                                <b>使用期限:</b><br /> {{e.due_time}}
+                                                <br />
+                                                <br />
+                                                <a onclick="link('shop')" class="hvr-underline-from-right">商家列表</a>
+                                                <a v-if="checked" class="hvr-underline-from-right" @click="delayShow(e.id)">我要使用</a>
+                                            </center>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="back hide" :id="'back'+e.id">
+                                    <center>
+                                        <h4><b>確定要使用嗎?</b></h4>
+                                        <p>按錯就掰掰了喔QAQ</p>
+                                        <a class="hvr-bubble-float-top" @click="dcheck(e.id)">取消</a>
+                                        <a class="hvr-bubble-float-top" @click="submit(e.id)">確認</a>
+                                    </center>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <!-- pop out modal End-->
+        </div>
+    </div>
+
+    <!-- link for jquery and bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+    <!-- vue and bootstrap(for toggle)-->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+    <!-- custom js-->
+    <script src="../js/couponList.js"></script>
+</body>
+
 </html>
