@@ -116,3 +116,11 @@ $(function(){
         }
 	});	
 })
+
+
+function Intial(id){
+	$('#list-'+id).addClass('active');
+	$('#right'+id).addClass('active');
+}
+
+Intial(resource.shops[0].num);
