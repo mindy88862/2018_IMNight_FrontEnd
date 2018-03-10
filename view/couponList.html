@@ -18,36 +18,31 @@
 
 <body>
     <div id="mainContext">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <h1 class="titles"><b>優惠券們</b></h1>
-                <h6 class="subtitles"></h6>
-            </div>
-        </div>
-
-
-        <!--control panal-->
+	<!--control panal-->
         <div class="main">
-            <!-- switch -->
-            <nav class="navbar navbar-light">
-                <div class="switchItem">
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<h1 class="titles"><b>優惠券們</b></h1>
+					<h6 class="subtitles"></h6>
+				</div>
+				
+				<div class="switchItem">
                     <p>只顯示可使用之優惠券
-                        <span>
-								<label class="switch" id = "switch">
-									<input type="checkbox" class = "inputSwitch" v-model="checked" onclick = "switchCase()">
-									<span class="slider round"></span>
-                        </label>
-                        </span>
+						<span>
+							<label class="switch" id = "switch" onclick = "switchCase()">
+								<span class="slider round"></span>
+							</label>
+						</span>
                     </p>
                 </div>
-            </nav>
+			</div>
 
             <!--couponList start-->
             <div class="row">
-                <div class="cardInRow" v-for="e in coupons" v-if="!checked">
+                <div class="cardInRow" v-for="e in coupons">
                     <div class="star rainbow" :id="'star'+e.id" v-on:click="grow(e.id)">
                     </div>
-                    <div class="description orbitLine" :id="'orb'+e.id">
+                    <div class="description orbitLine showUp" :id="'orb'+e.id">
                         <h5><b>{{e.store.title}}</b></h5>
                         <h3><b>{{e.title}}</b></h3>
                     </div>
@@ -55,7 +50,6 @@
                         <div class = "cit" :style="{ 'background-image' : 'url(\'' + e.img + '\')' }">
 						</div>
 						<!--<div class="cit lazy" :data-src="e.img">-->
-                        </div>
                     </div>
                 </div>
             </div>
@@ -68,8 +62,8 @@
                             <div class="modal-header">
                                 <h5 class="modal-title">{{e.title}}</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
+									<span aria-hidden="true">&times;</span>
+								</button>
                             </div>
 
                             <div class="modal-body" :id="'modal-body'+e.id">
@@ -89,7 +83,7 @@
                                                 <br />
                                                 <br />
                                                 <a onclick="link('shop')" class="hvr-underline-from-right">商家列表</a>
-                                                <a v-if="checked" class="hvr-underline-from-right" @click="delayShow(e.id)">我要使用</a>
+                                                <a v-if="!e.be_used && selected" class="hvr-underline-from-right" @click="delayShow(e.id)">我要使用</a>
                                             </center>
                                         </div>
                                     </div>
@@ -100,14 +94,12 @@
                                         <h4><b>確定要使用嗎?</b></h4>
                                         <p>按錯就掰掰了喔QAQ</p>
                                         <a class="hvr-bubble-float-top" @click="dcheck(e.id)">取消</a>
-                                        <a class="hvr-bubble-float-top" @click="submit(e.id)">確認</a>
+                                        <a class="hvr-bubble-float-top" @click="submit(e.id,e.label)">確認</a>
                                     </center>
                                 </div>
 
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>
