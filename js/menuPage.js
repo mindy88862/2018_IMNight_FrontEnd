@@ -104,6 +104,9 @@ function is_login_init() {
 			username = result.username;
 			point = result.profile.point;
 			$('#login-text').html('<span>又見面了，'+username+'！您目前累積 '+point+' 點</span>');
+		},
+		error: function() {
+			alert('get user info fail');
 		}
 	});
 
@@ -206,6 +209,7 @@ $(function(){
 			alert('get login status fail!');
 		}
 	});
+
 
 	$('#rule-title').fadeTo(1000, 0.7, 'swing', function() {
 		$('#rule-space').show("blind", 800, function() {

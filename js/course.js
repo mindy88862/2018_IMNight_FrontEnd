@@ -73,16 +73,16 @@ var resource = new Vue({
     }
 });
 
-$(function(){
-	$('.lazy').Lazy({
-		effect: 'fadeIn',
-		effectTime: 1000,
-		threshold: 0,
-        onError: function(element) {
-            console.log('error loading ' + element.data('src'));
-        }
-	});	
-})
+// $(function(){
+// 	$('.lazy').Lazy({
+// 		effect: 'fadeIn',
+// 		effectTime: 1000,
+// 		threshold: 0,
+//         onError: function(element) {
+//             console.log('error loading ' + element.data('src'));
+//         }
+// 	});	
+// })
 
 $(function() {
     $.ajax({
@@ -92,7 +92,7 @@ $(function() {
             withCredentials: true
         },
         success: function(data) {
-            //console.log(data);
+            console.log(data);
 			if(data.length > 4){
 				resource.courseMorethanFour = true;
 				for (var i = 0; i < 4; i++) {
@@ -103,6 +103,16 @@ $(function() {
 					resource.classes.push(data[i]);
 				}
 			}
+
+			// lazy load
+			$('.lazy').Lazy({
+				effect: 'fadeIn',
+				effectTime: 1000,
+				threshold: 0,
+		        onError: function(element) {
+		            console.log('error loading ' + element.data('src'));
+		        }
+			});	
         },
         error: function(data) {
             alert("fail" + data);
@@ -118,7 +128,7 @@ function showMoreCourse(){
             withCredentials: true
         },
         success: function(data) {
-			for (var i = 5; i < data.length; i++) {
+			for (var i = 4; i < data.length; i++) {
 				resource.classes.push(data[i]);
 			}
         },
