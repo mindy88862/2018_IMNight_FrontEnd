@@ -87,6 +87,9 @@
 		margin-right:0px !important;
 		width:100%;
 	}
+	.col-4{
+		background-color:#CCABE9;
+	}
 }
 
 /* title */
@@ -283,26 +286,17 @@
 	}
 }
 
-#right1{
-	background: linear-gradient(rgba(255,255,255,0.95),rgba(255,255,255,0.7)), url("../img/sofree.jpg");
+.tab-pane{
 	background-attachment: fixed;
+	background: linear-gradient(rgba(255,255,255,0.95),rgba(255,255,255,0.7));
 }
 
+/*
 #right2{
 	background: linear-gradient(rgba(255,255,255,0.95),rgba(255,255,255,0.7)), url("../img/nutBg.jpg");
 	background-attachment: fixed;
 }
-
-#right3{
-	background: linear-gradient(rgba(255,255,255,0.95),rgba(255,255,255,0.7)), url("../img/coconut.jpg");
-	background-attachment: fixed;
-}
-
-
-#right4{
-	
-	background-attachment: fixed;
-}
+*/
 
 
 @keyframes fade{
