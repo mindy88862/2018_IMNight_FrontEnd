@@ -1,6 +1,7 @@
 var resource = new Vue({
     el: '.main',
     data: {
+		vocherMorethanFour:false,
         selected: false,
         coupons: []
     },
@@ -73,10 +74,16 @@ function showAllVocher() {
             withCredentials: true
         },
         success: function(data) {
-            //console.log(data);
-            for (var i = 0; i < data.length; i++) {
-                resource.coupons.push(data[i]);
-            }
+            if(data.length > 4){
+				resource.vocherMorethanFour = true;
+				for (var i = 0; i < 4; i++) {
+					resource.coupons.push(data[i]);
+				}
+			}else{
+				for (var i = 0; i < data.length; i++) {
+					resource.coupons.push(data[i]);
+				}
+			}
         },
         error: function(data) {
             alert("fail showAllVocher" + data);
@@ -139,3 +146,22 @@ function switchCase() {
 }
 
 switchCase();
+
+function showMoreVocher(){
+    $.ajax({
+        url: 'https://imnight2018backend.ntu.im/earth/list/vocher/',
+        type: 'GET',
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function(data) {
+			for (var i = 4; i < data.length; i++) {
+				resource.coupons.push(data[i]);
+			}
+        },
+        error: function(data) {
+            alert("fail" + data);
+        }
+    });
+	resource.vocherMorethanFour = false;
+}
