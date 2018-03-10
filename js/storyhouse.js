@@ -104,7 +104,7 @@ function showMoreStory(){
             withCredentials: true
         },
         success: function(data) {
-			for (var i = 5; i < data.length; i++) {
+			for (var i = 4; i < data.length; i++) {
 				resource.stories.push(data[i]);
 			}
         },
