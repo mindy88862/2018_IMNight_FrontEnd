@@ -27,7 +27,7 @@
 				</div>
 				
 				<div class="switchItem">
-                    <p>只顯示可使用之優惠券
+                    <p>顯示抽到的之優惠券
 						<span>
 							<label class="switch" id = "switch" onclick = "switchCase()">
 								<span class="slider round"></span>
@@ -52,6 +52,9 @@
 						<!--<div class="cit lazy" :data-src="e.img">-->
                     </div>
                 </div>
+				<center>
+					<button v-if = "vocherMorethanFour&&!selected" type="button" class="btn btn-outline-danger" onclick = "showMoreVocher()">更多優惠</button>
+				</center>
             </div>
 
             <!-- pop out modal Start-->
