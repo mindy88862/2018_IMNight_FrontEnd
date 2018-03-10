@@ -51,9 +51,9 @@
       </div>
 
       <div class="row justify-content-center my-4 no-marg">
-        <div class="col-6 col-md-3"><img data-src="../img/people.png" class="lazy img-fluid floating" onclick="link('IM_people')"></div>
-        <div class="col-6 col-md-3"><img data-src="../img/sky.png" class="lazy img-fluid floating" onclick="link('storyhouse')"></div>
-        <div class="col-6 col-md-3"><img data-src="../img/land.png" class="lazy img-fluid floating" onclick="link('couponList')"></div>
+        <div class="col-6 col-md-3"><img data-src="../img/people.png" class="lazy img-fluid floating" onclick="loadPage('IM_people')"></div>
+        <div class="col-6 col-md-3"><img data-src="../img/sky.png" class="lazy img-fluid floating" onclick="loadPage('storyhouse')"></div>
+        <div class="col-6 col-md-3"><img data-src="../img/land.png" class="lazy img-fluid floating" onclick="loadPage('couponList')"></div>
       </div>
 
       <!-- for log in modal -->
@@ -100,10 +100,12 @@
                 <a v-if="!takenDiscount" id="draw-discount" data-toggle="modal" data-target="#coupon-Modal">領取每日優惠</a>
               </h5>
               <h5 v-if="drawnCard" class="jh">
-                本日已抽卡，快去 <a class="drawn-text" onclick="link('IM_people')">找卡友聊聊</a>！<br>
+                本日已抽卡，快去 <a class="drawn-text" onclick="jumpPage('IM_people')">找卡友聊聊</a>！<br>
+                <!-- 本日已抽卡，快去資管人找卡友聊聊！<br> -->
               </h5>
               <h5 v-if="takenDiscount" class="jh">
-                快去使用優惠券，前往 <a class="drawn-text" onclick="link('couponList')">優惠券列表</a>
+                快去使用優惠券，前往 <a class="drawn-text" onclick="jumpPage('couponList')">優惠券列表</a>
+                <!-- 本日已抽過優惠券，快去附近商家使用優惠券吧 -->
               </h5>
               <hr>
             </div>

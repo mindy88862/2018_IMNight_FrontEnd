@@ -82,11 +82,11 @@
 		transition:background-color 0s;
 		transition:height 0.5s;
 	}
-	.row.content{
+/* 	.row.content{
 		margin-left:0px !important;
 		margin-right:0px !important;
 		width:100%;
-	}
+	} */
 	.col-4{
 		background-color:#CCABE9;
 	}
@@ -111,7 +111,7 @@
 }
 
 .row{
-	/* width: 100vw; */
+	width: 100%;
 }
 /* sidebar */
 .col-4{

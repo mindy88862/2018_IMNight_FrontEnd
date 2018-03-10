@@ -22,6 +22,32 @@ $(document).ready(function(){
 
     // Bind event listener
     $(window).resize(checkWidth);
+
+   	$('.lazy').Lazy({
+		effect: 'fadeIn',
+		effectTime: 1000,
+		threshold: 0,
+        onError: function(element) {
+            console.log('error loading ' + element.data('src'));
+        }
+	});
+
+    $.ajax({
+        url: 'https://imnight2018backend.ntu.im/earth/list/store/',
+        type: 'GET',
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function(data) {
+            console.log(data);
+			for (var i = 0; i < data.length; i++) {
+				resource.shops.push(data[i]);
+			}
+        },
+        error: function(data) {
+            alert("fail" + data);
+        }
+    });
 });
 
 var resource = new Vue({
@@ -61,35 +87,35 @@ var resource = new Vue({
 	}
 });
 
-$(function(){
-	$('.lazy').Lazy({
-		effect: 'fadeIn',
-		effectTime: 1000,
-		threshold: 0,
-        onError: function(element) {
-            console.log('error loading ' + element.data('src'));
-        }
-	});	
-})
+// $(function(){
+// 	$('.lazy').Lazy({
+// 		effect: 'fadeIn',
+// 		effectTime: 1000,
+// 		threshold: 0,
+//         onError: function(element) {
+//             console.log('error loading ' + element.data('src'));
+//         }
+// 	});	
+// })
 
-$(function() {
-    $.ajax({
-        url: 'https://imnight2018backend.ntu.im/earth/list/store/',
-        type: 'GET',
-        xhrFields: {
-            withCredentials: true
-        },
-        success: function(data) {
-            console.log(data);
-			for (var i = 0; i < data.length; i++) {
-				resource.shops.push(data[i]);
-			}
-        },
-        error: function(data) {
-            alert("fail" + data);
-        }
-    });
-});
+// $(function() {
+//     $.ajax({
+//         url: 'https://imnight2018backend.ntu.im/earth/list/store/',
+//         type: 'GET',
+//         xhrFields: {
+//             withCredentials: true
+//         },
+//         success: function(data) {
+//             console.log(data);
+// 			for (var i = 0; i < data.length; i++) {
+// 				resource.shops.push(data[i]);
+// 			}
+//         },
+//         error: function(data) {
+//             alert("fail" + data);
+//         }
+//     });
+// });
 
 function Intial(id){
 	$('#list-'+id).addClass('active');

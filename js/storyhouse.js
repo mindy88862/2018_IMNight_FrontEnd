@@ -59,16 +59,16 @@ var resource = new Vue({
     }
 })
 
-$(function() {
-    $('.lazy').Lazy({
-        effect: 'fadeIn',
-        effectTime: 1000,
-        threshold: 0,
-        onError: function(element) {
-            console.log('error loading ' + element.data('src'));
-        }
-    });
-})
+// $(function() {
+//     $('.lazy').Lazy({
+//         effect: 'fadeIn',
+//         effectTime: 1000,
+//         threshold: 0,
+//         onError: function(element) {
+//             console.log('error loading ' + element.data('src'));
+//         }
+//     });
+// })
 
 $(function() {
     $.ajax({
@@ -89,6 +89,15 @@ $(function() {
 					resource.stories.push(data[i]);
 				}
 			}
+			
+		    // $('.lazy').Lazy({
+		    //     effect: 'fadeIn',
+		    //     effectTime: 1000,
+		    //     threshold: 0,
+		    //     onError: function(element) {
+		    //         console.log('error loading ' + element.data('src'));
+		    //     }
+		    // });
         },
         error: function(data) {
             alert("fail" + data);

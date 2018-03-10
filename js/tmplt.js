@@ -28,6 +28,7 @@ function loadPage(page,callback){
 			$.getScript( script_name )
 			  .done(function( script, textStatus ) {
 			    // alert('Successfully loaded script');
+			    $(window).scrollTop(0);
 			  })
 			  .fail(function( jqxhr, settings, exception ) {
 			    alert('Failed to load script');

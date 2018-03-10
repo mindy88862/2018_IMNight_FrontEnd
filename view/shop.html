@@ -14,7 +14,7 @@
 	<body>
 		<div id = "mainContext">
 			<div class="row">
-				<div class="col-md-12 text-center">
+				<div class="col-md-12 text-center px-0">
 					<h1 class="titles"><b>合作商家</b></h1>
 					<h6 class="subtitles">感謝商家們的熱情贊助</h6>
 				</div>
@@ -50,7 +50,7 @@
 				</div>
 				
 				<div class = "col-8" id = "detail">
-					<div class="tab-content" id="nav-tabContent">
+					<div class="tab-content px-3" id="nav-tabContent">
 						<div v-for = "e in shops" class = "tab-pane fade context show" :id = "'right'+e.id" role="tabpanel" :aria-labelledby="'list-'+e.id" :style="{ backgroundImage: 'url(' + e.bgUrl + ')' }">
 							<center>
 								<p v-html = "e.info" class = "word"></p>

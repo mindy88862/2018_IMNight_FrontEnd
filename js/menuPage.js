@@ -33,6 +33,13 @@ var coupon = new Vue({
 	}
 })
 
+function jumpPage(page) {
+	$('#remindModal').modal('toggle');
+	setTimeout(function(){
+		loadPage(page);
+	}, 500);
+}
+
 function imgEnlarge() {
 	setTimeout(function(){
 		$('.floating').addClass('enlarge');
