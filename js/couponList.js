@@ -1,7 +1,7 @@
 var resource = new Vue({
     el: '.main',
     data: {
-        checked: false,
+        selected: false,
         coupons: []
     },
     methods: {
@@ -15,31 +15,39 @@ var resource = new Vue({
             $('#front' + k).removeClass('shrink');
             $('#modal-content' + k).removeClass('changeBg');
         },
-        submit: function(k) {
+        submit: function(k,label) {
             this.dcheck(k);
-            $.ajax({
-                url: 'https://imnight2018backend.ntu.im/earth/use/vocher/',
-                type: 'POST',
-                xhrFields: {
-                    withCredentials: true
-                },
-                data: "", //hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-                success: function(data) {},
-                error: function(data) {
-                    console.log("fail submit");
-                }
-            });
+			$.ajax({
+				type: 'POST',
+				url: 'https://imnight2018backend.ntu.im/earth/use/vocher/',
+				xhrFields: {
+					withCredentials: true
+				},
+				data: JSON.stringify({"label":label}),
+				contentType: "application/json",
+				crossDomain: true,
+				beforeSend: function(request) {
+					var csrftoken = Cookies.get('csrftoken');
+					request.setRequestHeader("X-CSRFTOKEN", csrftoken);
+				},
+				success: function(data) {
+					//console.log("label: "+label);
+				},
+				error: function(data) {
+					alert("fail POST" + data);
+				}
+			});
         },
         grow: function(k) {
             k = String(k);
             $('#orb' + k).toggleClass('showUp');
             $('#star' + k).toggleClass('rainbow');
-            if ($('#star' + k).hasClass('moveV')) {
-                $('#star' + k).addClass('moveback');
-                $('#star' + k).removeClass('moveV');
-            } else {
+            if ($('#star' + k).hasClass('moveback')) {
+                //$('#star' + k).addClass('moveback');
                 $('#star' + k).removeClass('moveback');
-                $('#star' + k).addClass('moveV');
+            } else {
+                //$('#star' + k).removeClass('moveback');
+                $('#star' + k).addClass('moveback');
             }
         }
     }
@@ -57,7 +65,7 @@ $(function() {
 })
 
 function showAllVocher() {
-	console.log("showAllVocher");
+	//console.log("showAllVocher");
     $.ajax({
         url: 'https://imnight2018backend.ntu.im/earth/list/vocher/',
         type: 'GET',
@@ -65,10 +73,9 @@ function showAllVocher() {
             withCredentials: true
         },
         success: function(data) {
-            console.log(data);
+            //console.log(data);
             for (var i = 0; i < data.length; i++) {
                 resource.coupons.push(data[i]);
-				console.log("showAllVocher :"+i+" "+ data[i].img);
             }
         },
         error: function(data) {
@@ -79,6 +86,7 @@ function showAllVocher() {
 
 
 function showUserVocher() {
+	//console.log("showUserVocher");
     $.ajax({
         url: 'https://imnight2018backend.ntu.im/earth/vocher/',
         type: 'GET',
@@ -86,10 +94,21 @@ function showUserVocher() {
             withCredentials: true
         },
         success: function(data) {
-            console.log(data);
+            //console.log(data.length);
             for (var i = 0; i < data.length; i++) {
-                resource.coupons.push(data[i]);
-				console.log("showUserVocher " +data[i].img);
+				var object = {
+					id : data[i].id,
+					label : data[i].label,
+					title : data[i].vocher.title,
+					img : data[i].vocher.img,
+					vocher : data[i].vocher,					
+					description : data[i].vocher.description,
+					due_time : data[i].vocher.due_time,
+					useable : data[i].be_used,
+					store : data[i].vocher.store
+				};
+				resource.coupons.push(object);
+				//console.log(resource.coupons[i]);
             }
         },
         error: function(data) {
@@ -104,13 +123,18 @@ function clear() {
 }
 
 function switchCase() {
-    //console.log(resource.checked);
-    if (resource.checked == true) {
-        clear();
-        showAllVocher();
-    } else {
+	resource.selected = !resource.selected;
+    //console.log(resource.selected);
+    if (resource.selected == true) {
+		$('.switch').addClass('sliderChecked');
+		$('.slider').addClass('sliderMove');
         clear();
         showUserVocher();
+    } else {
+		$('.switch').removeClass('sliderChecked');
+		$('.slider').removeClass('sliderMove');
+        clear();
+        showAllVocher();
     }
 }
 
