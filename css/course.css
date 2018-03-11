@@ -12,10 +12,6 @@
 		margin-right:auto;
 	}
 	
-	/*.box{
-		margin-left:5px;
-	}*/
-	
 	.cb{
 		position:relative;
 		left:10px;
@@ -35,6 +31,16 @@
 	}
 }
 
+.main{
+	width:100%;
+	justify-content:center;
+}
+
+.mainContext{
+	width:100%;
+	justify-content:center;
+}
+
 .titles{
 	/* background-color:#E0E0E0; */
 	padding-bottom:3%;
@@ -49,6 +55,7 @@
 }
 
 .card{
+	border-radius:3%;
 	margin-bottom:15px;
 	width:300px;
 	transition:all 1s;
@@ -58,8 +65,7 @@
 
 .cit{
 	background-color:transparent;
-	border-top-left-radius:3%;
-	border-top-right-radius:3%;
+	border-radius:3%;
 	background-size:cover;
 	background-position:center center;
 	height:280px !important;
@@ -128,10 +134,11 @@
 }
 
 .box h5,.moreBtn{
-	 align-self:flex-end;
+	align-self:flex-end;
 }
 
 .space{
+	
 	max-height:300px;
 }
 
@@ -160,6 +167,7 @@
 	width:100%;
 	overflow:hidden;
 	justify-content: center;
+	display: -webkit-inline-box;
 }
 
 .modal-content{
