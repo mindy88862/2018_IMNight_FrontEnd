@@ -26,8 +26,8 @@
                 <div class="space" v-for="e in classes">
                     <!--front-->
                     <div class="card" v-bind="{id: 'card'+e.id}" v-on:click="move(e.id)">
-                        <div class = "cit hvr-curl-top-right" :style="{ 'background-image' : 'url(\'' + e.img + '\')' }">
-                        <!-- <div class="lazy cit hvr-curl-top-right" :data-src="e.img" v-on:click = "showCourse(e.label,e.id)"> -->
+                        <div class = "cit hvr-curl-top-right" :style="{ 'background-image' : 'url(\'' + e.img + '\')' }" v-on:click = "showCourse(e.label,e.id)">
+                        <!-- <div class="lazy cit hvr-curl-top-right" :data-src="e.img" > -->
                         </div>
                     </div>
                     <div class="cb" :id="'cb'+e.id">
