@@ -74,6 +74,8 @@ var resource = new Vue({
 					alert("fail showCourse" + data);
 				}
 			});
+			
+			this.move(id);
 		},
 		
     }
