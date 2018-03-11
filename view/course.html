@@ -24,9 +24,9 @@
         <div class="main">
             <div class="row">
                 <!--<div class="space" v-for="e in classes">-->
-				<div class="col-lg-4" v-for="e in classes">
-					<div class="card hvr-curl-top-right" :id = "'card'+e.id" v-on:click = "showCourse(e.label,e.id)">
-						<img class="card-img" :src="e.img" v-on:click="move(e.id)">
+				<div class="test" v-for="e in classes">
+					<div class="card hvr-curl-top-right" :id = "'card'+e.id" v-on:click = "showCourse(e.label,e.id)" :style = "{ 'background-image' : 'url(\'' + e.img + '\')' }">
+						<!--<img class="card-img" :src="e.img" v-on:click="move(e.id)">-->
 					</div>
 					
 					<div class="cb" :id="'cb'+e.id">
