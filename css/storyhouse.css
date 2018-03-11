@@ -24,12 +24,12 @@
 	.tag{
 		position:relative;
 		left:-5px;
-		top:-40%;
+		top:-50%;
 	}
 	.triangle{
 		position:relative;
 		left:-5px;
-		top:-40%;
+		top:-50%;
 	}
 	.test{
 		margin-right:20px;
@@ -44,12 +44,12 @@
 	.tag{
 		position:relative;
 		left:-5px;
-		bottom:40%;
+		bottom:50%;
 	}
 	.triangle{
 		position:relative;
 		left:-5px;
-		bottom:40%;
+		bottom:50%;
 	}
 	.test{
 		margin-right:20px;
@@ -62,6 +62,10 @@
 
 .subtitles{
 	color: rgba(0,0,0,0.5);
+}
+
+.test{
+	height:330px;
 }
 
 .container{

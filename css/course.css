@@ -4,36 +4,42 @@
 		width:40%;
 	}
 	.moveRight{
-		transform:translateX(60%) translateY(-20px);
+		transform:translateX(120%) translateY(-20px);
+	}
+	.card{
+		margin-left:auto;
+		margin-right:auto;
 	}
 }
 /*ipad*/
 @media screen and (min-width:600px) and (max-width:1000px){
+	.card{
+		margin-left:10px;
+	}
 	.moveRight{
-		transform:translateX(60%) translateY(-20px);
+		transform:translateX(100%) translateY(-20px);
 	}
 	.cb{
 		width:40%;
 	}
+	.test{
+		margin-right:20px;
+	}
 }
 /*laptop*/
 @media screen and (min-width:1000px){
+	.card{
+		margin-left:10px;
+	}
 	.moveRight{
 		transform:translateX(60%) translateY(-20px);
 	}
 	.cb{
 		width:60%;
 	}
-}
-
-.row{
-	padding:10px !important;
-}
-
-/*test*/
-.card-img{
-	width: 100%;
-	height: 100%;
+	.test{
+		margin-right:20px;
+	}
 }
 
 .titles{
@@ -53,15 +59,14 @@
 	border-radius:3%;
 	transition:all 1s;
 	z-index:1;
+	height:300px;
+	width:300px;
+	background-position:center center;
 	border:transparent;
 }
 
-.cit{
-	background-color:transparent;
-	border-radius:3%;
-	background-size:cover;
-	background-position:center center;
-	height:280px !important;
+.test{
+	height:330px;
 }
 
 /* Curl Top Right */
@@ -119,7 +124,7 @@
 	height: 0px;
 	width: 0px;
 	position:relative;
-	top:-120px;
+	top:-130px;
 	left:10px;
 	padding:10px;
 	display:flex;
@@ -148,14 +153,11 @@
 	transform:rotate(3deg) translateY(-20%);
 }
 
-/*.row{
-	padding-left:2%;
-	padding-top:2%;
-	width:100%;
-	overflow:hidden;
-	justify-content: center;
-	display: -webkit-inline-box;
-}*/
+.row{
+	margin-left:auto;
+	margin-right:auto;
+	justify-content:center;
+}
 
 .modal-content{
 	background: linear-gradient(rgba(255,255,255,0.9),rgba(255,255,255,0.9)), url("../img/bgRed.jpg") no-repeat center center;
